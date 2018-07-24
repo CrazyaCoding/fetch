@@ -56,10 +56,18 @@ function get(url, config) {
 		}),
 		config.timeout
 	)
+		.then(response_fn)
 		.then(checkoutStatus)
 		.then(parseJson)
-		.then(response_fn)
-		.then(data => data);
+		.then(
+			data => {
+				return data;
+			},
+			err => {
+				response_fn(err);
+				throw new Error(err);
+			}
+		);
 }
 
 function post(url, data, config) {
@@ -78,9 +86,17 @@ function post(url, data, config) {
 			body: JSON.stringify(data)
 		}),
 		config_response.timeout
-	).then(reponse => {
-		return reponse.json();
-	});
+	)
+		.then(response_fn)
+		.then(
+			response => {
+				return response.json();
+			},
+			err => {
+				response_fn(err);
+				throw new Error(err);
+			}
+		);
 }
 
 function checkoutStatus(response) {

@@ -2,7 +2,8 @@ function _fetch(fetch_promise, timeout) {
 	let abort_fn = null;
 	let abort_promise = new Promise((resolve, reject) => {
 		abort_fn = function() {
-			reject('time out!');
+			//  这里要在拦截器的response里面被拦截到
+			reject('timeout');
 		};
 	});
 
