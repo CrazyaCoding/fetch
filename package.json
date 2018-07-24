@@ -1,0 +1,22 @@
+{
+  "name": "fetch",
+  "version": "1.0.0",
+  "description": "fetch封装",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CrazyaCoding/fetch.git"
+  },
+  "author": "shangpanpan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CrazyaCoding/fetch/issues"
+  },
+  "homepage": "https://github.com/CrazyaCoding/fetch#readme",
+  "devDependencies": {
+    "parcel": "^1.9.7"
+  }
+}
