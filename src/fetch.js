@@ -3,11 +3,6 @@ import _fetch from './timeout_fetch';
 var config_request = {
 	mode: 'no-cors',
 	credentials: 'same-origin',
-	timeout: 5000
-};
-var config_response = {
-	mode: 'no-cors',
-	credentials: 'same-origin',
 	contentType: 'application/json',
 	accept: 'application/json',
 	timeout: 5000
@@ -56,11 +51,17 @@ function get(url, config) {
 		}),
 		config.timeout
 	)
-		.then(response_fn)
 		.then(checkoutStatus)
 		.then(parseJson)
 		.then(
 			data => {
+				let handle_data = null;
+				try {
+					handle_data = response_fn(data) || data;
+				} catch (e) {
+					console.log(e);
+				}
+
 				return data;
 			},
 			err => {
@@ -85,12 +86,18 @@ function post(url, data, config) {
 			credentials: config.credentials,
 			body: JSON.stringify(data)
 		}),
-		config_response.timeout
+		config.timeout
 	)
-		.then(response_fn)
+		.then(response => response.json())
 		.then(
-			response => {
-				return response.json();
+			data => {
+				let handle_data = null;
+				try {
+					handle_data = response_fn(data) || data;
+				} catch (e) {
+					console.log(e);
+				}
+				return handle_data;
 			},
 			err => {
 				response_fn(err);

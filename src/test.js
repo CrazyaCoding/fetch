@@ -17,7 +17,7 @@ fetchs.interceptors.response(reponse => {
 	return reponse;
 });
 
-/* fetchs
+fetchs
 	.get('http://localhost:3003/students')
 	.then(response => {
 		console.log('========== success ======');
@@ -26,9 +26,9 @@ fetchs.interceptors.response(reponse => {
 	.catch(e => {
 		console.log('==========test catch===========');
 		console.log(e);
-	}); */
+	});
 
-fetchs
+/* fetchs
 	.post(' http://localhost:3003/students')
 	.then(response => {
 		console.log('========== success ======');
@@ -38,3 +38,4 @@ fetchs
 		console.log('==========test catch===========');
 		console.log(e);
 	});
+ */
