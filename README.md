@@ -3,7 +3,7 @@
 ## useage
 
 ```javascript
-import fetchs from '@shang/fetch';
+import fetchs from '@shangs/fetch';
 ```
 
 ```javascript
@@ -46,7 +46,10 @@ fetchs.interceptors.request(config => {
 	return config;
 });
 
-fetchs.interceptors.response(reponse => {
-	return reponse;
-});
+fetchs.interceptors.response(
+	reponse => {
+		return reponse;
+	},
+	err => {}
+);
 ```

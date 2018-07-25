@@ -11,13 +11,19 @@ fetchs.interceptors.request(config => {
 	return config;
 });
 
-fetchs.interceptors.response(reponse => {
-	console.log('==========interceptors response===========');
-	console.log(reponse);
-	return reponse;
-});
+fetchs.interceptors.response(
+	reponse => {
+		console.log('==========interceptors response===========');
+		console.log(reponse);
+		return reponse;
+	},
+	err => {
+		console.log('==========interceptors response error===========');
+		console.log(err);
+	}
+);
 
-fetchs
+/* fetchs
 	.get('http://localhost:3003/students')
 	.then(response => {
 		console.log('========== success ======');
@@ -27,8 +33,8 @@ fetchs
 		console.log('==========test catch===========');
 		console.log(e);
 	});
-
-/* fetchs
+ */
+fetchs
 	.post(' http://localhost:3003/students')
 	.then(response => {
 		console.log('========== success ======');
@@ -38,4 +44,3 @@ fetchs
 		console.log('==========test catch===========');
 		console.log(e);
 	});
- */

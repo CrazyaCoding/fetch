@@ -9,7 +9,7 @@ var config_request = {
 };
 
 /**
- * errorfn = function() {} 稍后在加
+ * request_error_fn = function() {} 稍后在加
  */
 var request_fn = function() {};
 function interceptors_request(fn = function() {}) {
@@ -25,14 +25,21 @@ function interceptors_request(fn = function() {}) {
 	}
 }
 
-var response_fn = null;
-function interceptors_response(fn = function() {}) {
+var response_fn = function() {},
+	response_error_fn = function() {};
+function interceptors_response(fn = function() {}, errfn = function() {}) {
 	try {
 		response_fn = function(response) {
 			if (fn.toString() === 'function () {}') {
 				return response;
 			}
 			return fn(response);
+		};
+		response_error_fn = function(err) {
+			if (errfn.toString() === 'function () {}') {
+				return err;
+			}
+			errfn(err);
 		};
 	} catch (e) {
 		console.log(e);
@@ -62,10 +69,10 @@ function get(url, config) {
 					console.log(e);
 				}
 
-				return data;
+				return handle_data;
 			},
 			err => {
-				response_fn(err);
+				response_error_fn(err);
 				throw new Error(err);
 			}
 		);
@@ -100,7 +107,7 @@ function post(url, data, config) {
 				return handle_data;
 			},
 			err => {
-				response_fn(err);
+				response_error_fn(err);
 				throw new Error(err);
 			}
 		);
