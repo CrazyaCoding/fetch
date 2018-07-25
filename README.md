@@ -1,5 +1,11 @@
 # fetch
 
+## install
+
+```#
+npm i @shangs/fetch --save-dev
+```
+
 ## useage
 
 ```javascript

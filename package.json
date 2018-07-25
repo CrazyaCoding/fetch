@@ -1,8 +1,8 @@
 {
 	"name": "@shangs/fetch",
-	"version": "1.0.0",
+	"version": "1.0.2",
 	"description": "针对fetch封装",
-	"main": "index.js",
+	"main": "src/fetch.js",
 	"scripts": {
 		"test": "parcel src/test.js --no-hmr"
 	},
