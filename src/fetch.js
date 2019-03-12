@@ -1,4 +1,5 @@
 import _fetch from './timeout_fetch';
+import qs from 'qs';
 
 var config_request = {
 	mode: 'no-cors',
@@ -61,7 +62,7 @@ function get(url, config) {
 		.then(checkoutStatus)
 		.then(parseJson)
 		.then(
-			data => {
+			(data) => {
 				let handle_data = null;
 				try {
 					handle_data = response_fn(data) || data;
@@ -71,7 +72,7 @@ function get(url, config) {
 
 				return handle_data;
 			},
-			err => {
+			(err) => {
 				response_error_fn(err);
 				throw new Error(err);
 			}
@@ -91,13 +92,13 @@ function post(url, data, config) {
 			mode: config.mode,
 			method: 'POST',
 			credentials: config.credentials,
-			body: JSON.stringify(data)
+			body: qs.stringify(data)
 		}),
 		config.timeout
 	)
-		.then(response => response.json())
+		.then((response) => response.json())
 		.then(
-			data => {
+			(data) => {
 				let handle_data = null;
 				try {
 					handle_data = response_fn(data) || data;
@@ -106,7 +107,7 @@ function post(url, data, config) {
 				}
 				return handle_data;
 			},
-			err => {
+			(err) => {
 				response_error_fn(err);
 				throw new Error(err);
 			}

@@ -1,6 +1,6 @@
 {
 	"name": "@shangs/fetch",
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"description": "针对fetch封装",
 	"main": "src/fetch.js",
 	"scripts": {
