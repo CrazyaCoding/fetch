@@ -4,9 +4,13 @@ import qs from 'qs';
 var config_request = {
 	mode: 'no-cors',
 	credentials: 'same-origin',
-	contentType: 'application/json',
-	accept: 'application/json',
-	timeout: 5000
+	// contentType: 'application/json',
+	// accept: 'application/json',
+	timeout: 5000,
+	headers: {
+		contentType: 'application/json',
+		accept: 'application/json',
+	}
 };
 
 /**
@@ -55,7 +59,8 @@ function get(url, config) {
 		fetch(url, {
 			method: 'GET',
 			mode: config.mode,
-			credentials: config.credentials
+			credentials: config.credentials,
+			headers: config.headers
 		}),
 		config.timeout
 	)
@@ -85,10 +90,11 @@ function post(url, data, config) {
 
 	return _fetch(
 		fetch(url, {
-			headers: {
+			/* headers: {
 				Accept: config.accept,
 				'Content-type': config.contentType
-			},
+			}, */
+			headers: config.headers,
 			mode: config.mode,
 			method: 'POST',
 			credentials: config.credentials,

@@ -16,8 +16,10 @@ import fetchs from '@shangs/fetch';
 let config = {
 	mode: 'no-cors',
 	credentials: 'same-origin',
-	contentType: 'application/json',
-	accept: 'application/json',
+	headers: {
+		contentType: 'application/json',
+		accept: 'application/json',
+	}
 	timeout: 5000
 };
 // GET
