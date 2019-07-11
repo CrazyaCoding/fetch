@@ -1,10 +1,12 @@
 {
 	"name": "@shangs/fetch",
-	"version": "1.1.3",
+	"version": "1.2.0",
 	"description": "针对fetch封装",
-	"main": "src/fetch.js",
+	"main": "src/lib/fetch.js",
 	"scripts": {
-		"test": "parcel src/test.js --no-hmr"
+		"dev1": "parcel src/test.js --no-hmr",
+		"build": "webpack",
+		"test": "mocha --require babel-core/register"
 	},
 	"repository": {
 		"type": "git",
@@ -17,6 +19,8 @@
 	},
 	"homepage": "https://github.com/CrazyaCoding/fetch#readme",
 	"devDependencies": {
-		"parcel": "^1.9.7"
+		"parcel": "^1.9.7",
+		"webpack": "^4.35.3",
+		"webpack-cli": "^3.3.5"
 	}
 }

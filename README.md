@@ -32,6 +32,15 @@ fetchs
 		console.log(e);
 	});
 
+fetchs
+	.get('http://localhost:3003/students', {params: {name: 'Lily'}}, config)
+	.then(response => {
+		console.log(response);
+	})
+	.catch(e => {
+		console.log(e);
+	});
+
 // POST
 fetchs
 	.post(' http://localhost:3003/students', data, config)

@@ -8,8 +8,8 @@ var config_request = {
 	// accept: 'application/json',
 	timeout: 5000,
 	headers: {
-		contentType: 'application/json',
-		accept: 'application/json',
+		// contentType: 'application/json',
+		// accept: 'application/json',
 	}
 };
 
@@ -51,12 +51,14 @@ function interceptors_response(fn = function() {}, errfn = function() {}) {
 	}
 }
 
-function get(url, config) {
+function get(url, data, config) {
 	request_fn();
 
-	config = Object.assign(config_request, config);
+	let {formUrl, formConfig} = formGetArgs({url, data, config});
+	config = Object.assign(config_request, formConfig);
+
 	return _fetch(
-		fetch(url, {
+		fetch(formUrl, {
 			method: 'GET',
 			mode: config.mode,
 			credentials: config.credentials,
@@ -87,13 +89,8 @@ function get(url, config) {
 function post(url, data, config) {
 	request_fn();
 	config = Object.assign(config_request, config);
-
 	return _fetch(
 		fetch(url, {
-			/* headers: {
-				Accept: config.accept,
-				'Content-type': config.contentType
-			}, */
 			headers: config.headers,
 			mode: config.mode,
 			method: 'POST',
@@ -132,6 +129,28 @@ function checkoutStatus(response) {
 }
 function parseJson(reponse) {
 	return reponse.json();
+}
+
+/**
+ * 格式化get函数的参数
+ * @param {*} url 
+ * @param {*} data 参数 
+ * @param {*} config 配置 
+ */
+function formGetArgs({url, data={}, config={}}) {
+	let { params } = data;
+	if (params && Object.keys(params).length > 0) {
+		url += '?';
+		Object.keys(params).map(key => (url += key + '=' + params[key] + '&'));
+		url.slice(0, -1); // 取走最后一位&
+	} else {
+		config = data;
+	}
+
+	return {
+		formUrl: url,
+		formConfig: config
+	}
 }
 
 export default {
